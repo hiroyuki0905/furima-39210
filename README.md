@@ -1,24 +1,84 @@
-# README
+db設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ ## User_table 
+      
+  |         Column      |       Type      |    Option                |     
+  |---------------------|-----------------|--------------------------|    
+  |        name         |     string      |null: false               |
+  |---------------------|-----------------|--------------------------|   
+  |        email        |     string      |null: false, unique: true |
+  |---------------------|-----------------|--------------------------|      
+  | encrypted_password  |     string      |null: false               |
+  |---------------------|-----------------|--------------------------|
+  |    last_name        |    string       |null: false               |
+  |---------------------|-----------------|--------------------------|  
+  |    first_name       |     string      |null: false               |
+  |---------------------|-----------------|--------------------------|
+  |     birthday        |     date        |null: false               |
 
-Things you may want to cover:
+  ### Association 
+   - has_many : item_table
+   - has_many : Orders_table
 
-* Ruby version
 
-* System dependencies
+  ## item_table
 
-* Configuration
+  |       Column        |       Type      |    Option                  |     
+  |---------------------|-----------------|----------------------------|    
+  |        name         |     string      |  null: false               |
+  |---------------------|-----------------|----------------------------|
+  |        text         |      text       |   null: false              |
+  |---------------------|-----------------|----------------------------|      
+  |         price       |    integer      |    null:false              |
+  |---------------------|-----------------|----------------------------|
+  |   condition_id      |    integer      |   null:false               |
+  |---------------------|-----------------|----------------------------|  
+  |   delivery_fee_id   |     integer     |  null: false               |
+  |---------------------|-----------------|----------------------------|
+  |      prefecture_id  |    integer      |   null: false              |
+  |---------------------|-----------------|----------------------------|   
+  |    delivery_day_id  |    integer      |  null:false                |
+  |---------------------|-----------------|----------------------------|      
+  |       user          |   references    | null:false,foreign_key:true|
 
-* Database creation
+  ### Association 
+  - belongs_to : User_table
+  - has_many   : Orders_table
 
-* Database initialization
 
-* How to run the test suite
+  ## Orders_table
 
-* Services (job queues, cache servers, search engines, etc.)
+  |         Column      |       Type      |    Option                    |   
+  |---------------------|-----------------|------------------------------|
+  |         user        |  references     | null:false,foreign_key:true  |
+  |---------------------|-----------------|------------------------------|   
+  |         item        |  references     | null:false,foreign_key:true  |
+  |---------------------|-----------------|------------------------------|   
 
-* Deployment instructions
+  ### Association 
+  - belongs_to : User_table
+  - belongs_to : Item_table
+  - has_one    : address
+  
 
-* ...
+  ## Address_table
+   |         Column      |       Type      |    Option                   |
+   |---------------------|-----------------|-----------------------------|
+   |     postal_cord     |     string      |    null:false               |
+   |---------------------|-----------------|-----------------------------| 
+   |    prefecture_id	   |     integer	   |    null: false              |
+   |---------------------|-----------------|-----------------------------|
+   |        city	       |     string	     |    null: false              |
+   |---------------------|-----------------|-----------------------------|
+   |      house_number   |    	string     |   	null: false              |
+   |---------------------|-----------------|-----------------------------|
+   |       building	     |      string	   |                             |
+   |---------------------|-----------------|-----------------------------|
+   |    phone_number	   |      string	   |    null: false              |
+   |---------------------|-----------------|-----------------------------|
+   |      buy_record     |  	references	 |null: false, foreign_key:true|
+
+  ### Association 
+  - belongs_to : Oder_table
+  - belongs_to : prefecture_id
+      
