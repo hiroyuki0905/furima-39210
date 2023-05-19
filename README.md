@@ -4,11 +4,11 @@ db設計
       
   |         Column      |       Type      |    Option                |     
   |---------------------|-----------------|--------------------------|    
-  |       nickname      |     string      |null: false, unique: true |
+  |       nickname      |     string      |null: false,              |
   |---------------------|-----------------|--------------------------|   
-  |        email        |     string      |null: false, unique: true |
+  |        email        |     string      |null: false,              |
   |---------------------|-----------------|--------------------------|      
-  | encrypted_password  |     string      |null: false, unique: true |
+  | encrypted_password  |     string      |null: false,              |
   |---------------------|-----------------|--------------------------|
   |    last_name        |     string      |null: false               |
   |---------------------|-----------------|--------------------------|  
@@ -31,7 +31,7 @@ db設計
   |---------------------|-----------------|----------------------------|    
   |        name         |     string      |  null: false               |
   |---------------------|-----------------|----------------------------|
-  |        text         |      text       |   null: false              |
+  |      description    |      text       |   null: false              |
   |---------------------|-----------------|----------------------------|   
   |     category_id	    |     integer     |  	null: false              |
   |---------------------|-----------------|----------------------------|
@@ -81,7 +81,9 @@ db設計
    |---------------------|-----------------|-----------------------------|
    |    phone_number	   |      string	   |    null: false              |
    |---------------------|-----------------|-----------------------------|
+   |       order_id      |      integer    |     null: false             |
+   
    
   ### Association 
-  - has_one  : order
+  - belongs_to :order
       
