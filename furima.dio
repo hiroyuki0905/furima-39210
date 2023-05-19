@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="38Gp1-Y6O-POx-cpBhje" name="ページ1">
-        <mxGraphModel dx="906" dy="573" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="937" dy="633" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -13,13 +13,13 @@
                 <mxCell id="19" value="Addresses" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=0;" parent="1" vertex="1">
                     <mxGeometry x="130" y="480" width="240" height="150" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="postal_cord&#10;prefecture_id&#10;city&#10;house_number&#10;building&#10;phone_number&#10;buy_record" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;rounded=1;" parent="19" vertex="1">
+                <mxCell id="20" value="postal_cord&#10;prefecture_id&#10;city&#10;house_number&#10;building&#10;phone_number&#10;order" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;rounded=1;" parent="19" vertex="1">
                     <mxGeometry y="30" width="240" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="Items" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=0;" parent="1" vertex="1">
                     <mxGeometry x="470" y="200" width="240" height="190" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="name&#10;text&#10;category_id&#10;price&#10;condition_id&#10;delivery_fee_id&#10; prefecture_id&#10;delivery_day_iduser&#10;user" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;rounded=1;" parent="21" vertex="1">
+                <mxCell id="22" value="name&#10;description&#10;category_id&#10;price&#10;condition_id&#10;delivery_fee_id&#10; prefecture_id&#10;delivery_day_iduser&#10;user" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;rounded=1;" parent="21" vertex="1">
                     <mxGeometry y="30" width="240" height="160" as="geometry"/>
                 </mxCell>
                 <mxCell id="23" value="Orders" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=0;" parent="1" vertex="1">
