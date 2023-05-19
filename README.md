@@ -1,34 +1,40 @@
 db設計
 
- ## User_table 
+ ## Users_table 
       
   |         Column      |       Type      |    Option                |     
   |---------------------|-----------------|--------------------------|    
-  |        name         |     string      |null: false               |
+  |       nickname      |     string      |null: false, unique: true |
   |---------------------|-----------------|--------------------------|   
   |        email        |     string      |null: false, unique: true |
   |---------------------|-----------------|--------------------------|      
-  | encrypted_password  |     string      |null: false               |
+  | encrypted_password  |     string      |null: false, unique: true |
   |---------------------|-----------------|--------------------------|
-  |    last_name        |    string       |null: false               |
+  |    last_name        |     string      |null: false               |
   |---------------------|-----------------|--------------------------|  
   |    first_name       |     string      |null: false               |
+  |---------------------|-----------------|--------------------------|
+  |    last_name_kana   |     string      |null: false               |
+  |---------------------|-----------------|--------------------------|  
+  |    first_name_kana  |     string      |null: false               |
   |---------------------|-----------------|--------------------------|
   |     birthday        |     date        |null: false               |
 
   ### Association 
-   - has_many : item_table
-   - has_many : Orders_table
+   - has_many : items
+   - has_many : orders
 
 
-  ## item_table
+  ## items_table
 
   |       Column        |       Type      |    Option                  |     
   |---------------------|-----------------|----------------------------|    
   |        name         |     string      |  null: false               |
   |---------------------|-----------------|----------------------------|
   |        text         |      text       |   null: false              |
-  |---------------------|-----------------|----------------------------|      
+  |---------------------|-----------------|----------------------------|   
+  |     category_id	    |     integer     |  	null: false              |
+  |---------------------|-----------------|----------------------------|
   |         price       |    integer      |    null:false              |
   |---------------------|-----------------|----------------------------|
   |   condition_id      |    integer      |   null:false               |
@@ -42,26 +48,25 @@ db設計
   |       user          |   references    | null:false,foreign_key:true|
 
   ### Association 
-  - belongs_to : User_table
-  - has_many   : Orders_table
-
+  - belongs_to : user
+  - has_one    : order
 
   ## Orders_table
 
   |         Column      |       Type      |    Option                    |   
   |---------------------|-----------------|------------------------------|
-  |         user        |  references     | null:false,foreign_key:true  |
+  |         user        |   references    | null:false,foreign_key:true  |
   |---------------------|-----------------|------------------------------|   
-  |         item        |  references     | null:false,foreign_key:true  |
+  |         item        |   references    | null:false,foreign_key:true  |
   |---------------------|-----------------|------------------------------|   
 
   ### Association 
-  - belongs_to : User_table
-  - belongs_to : Item_table
+  - belongs_to : user
+  - belongs_to : item
   - has_one    : address
   
 
-  ## Address_table
+  ## Addresses_table
    |         Column      |       Type      |    Option                   |
    |---------------------|-----------------|-----------------------------|
    |     postal_cord     |     string      |    null:false               |
@@ -76,9 +81,7 @@ db設計
    |---------------------|-----------------|-----------------------------|
    |    phone_number	   |      string	   |    null: false              |
    |---------------------|-----------------|-----------------------------|
-   |      buy_record     |  	references	 |null: false, foreign_key:true|
-
+   
   ### Association 
-  - belongs_to : Oder_table
-  - belongs_to : prefecture_id
+  - has_one  : order
       
