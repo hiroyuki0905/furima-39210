@@ -1,16 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  before do
+    @user = FactoryBot.build(:user)
+  end
+
   describe 'ユーザー新規登録' do
+    it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
+      expect(@user).to be_valid
+    end
     it 'nicknameが空では登録できない' do
-      user = User.new(nickname: '', email: 'test@example', password: '000000', password_confirmation: '000000')
-      user.valid?
-      expect(user.errors.full_messages).to include("Nickname can't be blank")
+      @user.nickname = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Nickname can't be blank")
     end
     it 'emailが空では登録できない' do
-      user = User.new(nickname: "abe", email: "", password: "00000000", password_confirmation: "00000000")
-      user.valid?
-      expect(user.errors.full_messages).to include("Email can't be blank")
+      @user.email = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email can't be blank")
     end
     it 'メールアドレスがすでに登録しているユーザーと重複していると保存できない' do
       @user.save
@@ -32,7 +39,12 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
     it 'パスワード（確認含む）が半角英数字でないと保存できない' do
-      @user.password = '123456'
+      @user.password = 'password' # 英字のみのパスワード
+      @user.password_confirmation = 'password'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+
+      @user.password = '123456' # 数字のみのパスワード
       @user.password_confirmation = '123456'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
@@ -69,5 +81,4 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
-  pending "add some examples to (or delete) #{__FILE__}"
 end
