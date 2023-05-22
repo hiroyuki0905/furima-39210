@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-
-  def index  # indexアクションを定義した
+  # indexアクションを定義した
+  def index  
   end
   
 end
