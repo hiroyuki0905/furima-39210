@@ -1,5 +1,8 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  
+  belongs_to :user
+  has_one_attached :image
 
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
@@ -7,7 +10,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :delivery_day
 
-  validates :item_images,         presence: true
+  
+  
   validates :name,                presence: true, length: { maximum: 40 }
   validates :description,         presence: true, length: { maximum: 1000 }
   validates :category,            presence: true

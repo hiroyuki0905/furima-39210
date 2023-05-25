@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index  
-    @items = Item.includes(:images).order("created_at DESC")
+    @items = Item.includes(:item_images).order("created_at DESC")
   end
 
   def new
@@ -11,12 +11,13 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.valid?
-       @item.save
-       redirect_to root_path
+    @item.user = current_user
+    
+    if @item.save
+      redirect_to root_path
     else
       render :new
-    end 
+    end
   end
 
   private
@@ -30,9 +31,7 @@ class ItemsController < ApplicationController
       :prefecture_id,
       :delivery_fee_id,
       :delivery_day_id,
-      :postage_type_id,
       :price,
-      images_attributes: [:id, :image] 
     )
   end
 end
