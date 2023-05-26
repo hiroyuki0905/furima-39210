@@ -1,13 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  describe '#create' do
-    it '必須項目が入力されていれば登録できること' do
-      category = FactoryBot.build(:category)
-      user = FactoryBot.build(:user)
-      item = FactoryBot.build(:item, category: category, seller_id: user.id)
-      expect(item).to be_valid
-    end
+  before do
+    @item = FactoryBot.create(:item)
+  end
 
     it 'nameがない場合は登録できないこと' do
       item = FactoryBot.build(:item, name: nil)

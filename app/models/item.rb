@@ -18,5 +18,4 @@ class Item < ApplicationRecord
   validates :delivery_fee, presence: true
   validates :delivery_day, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  validates :price, format: { with: /\A[0-9]+\z/, message: 'は数値で入力してください' }
 end

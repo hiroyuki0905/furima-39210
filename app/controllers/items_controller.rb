@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params.merge(user: current_user))
+    @item = current_user.items.build(item_params)
 
     if @item.save
       redirect_to root_path
@@ -30,6 +30,6 @@ class ItemsController < ApplicationController
       :delivery_fee_id,
       :delivery_day_id,
       :price
-    )
+    ).merge(user: current_user)
   end
 end
