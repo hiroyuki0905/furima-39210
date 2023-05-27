@@ -29,7 +29,9 @@ class ItemsController < ApplicationController
       :prefecture_id,
       :delivery_fee_id,
       :delivery_day_id,
-      :price
+      :price,
+      :content,
+      :image
     ).merge(user: current_user)
   end
 end

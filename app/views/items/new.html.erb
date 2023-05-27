@@ -19,9 +19,7 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.fields_for :item_images do |ff| %>
-          <%= ff.file_field :image, id: "item-image" %>
-        <% end %>
+          <%= f.file_field :image, id: "item-image" %>
       </div>
     </div>
     <%# /商品画像 %>

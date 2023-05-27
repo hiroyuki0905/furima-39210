@@ -5,7 +5,7 @@ RSpec.describe Item, type: :model do
     @item = FactoryBot.build(:item)
   end
 
-    it 'itemが全部あれば' do
+    it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
       expect(@item).to be_valid
     end  
 
