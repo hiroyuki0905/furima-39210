@@ -78,6 +78,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors[:price]).to include("must be less than or equal to 9999999")
       end
+
+      it 'ユーザーが紐づいていないと保存できないこと' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors[:user]).to include("must exist")
+      end
+
+      it '画像が添付されていないと保存できないこと' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors[:image]).to include("can't be blank")
+      end
     end
   end
 end
