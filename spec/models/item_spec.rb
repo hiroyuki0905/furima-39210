@@ -4,50 +4,78 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
   end
+  
+  describe 'ユーザー新規登録' do
+    context '新規登録できるとき' do
+      it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
+        expect(@item).to be_valid
+      end  
 
-    it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
-      expect(@item).to be_valid
-    end  
+      it 'nameがない場合は登録できないこと' do
+        @item = FactoryBot.build(:item, name: nil)
+        @item.valid?
+        expect(@item.errors[:name]).to include("can't be blank")
+      end
 
-    it 'nameがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, name: nil)
-      @item.valid?
-      expect(@item.errors[:name]).to include("can't be blank")
+      it 'descriptionがない場合は登録できないこと' do
+        @item = FactoryBot.build(:item, description: nil)
+        @item.valid?
+        expect(@item.errors[:description]).to include("can't be blank")
+      end
+
+      it 'category_idが0を選ばれていると保存ができない' do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 0")
+      end
+    
+      it 'condition_idが0を選ばれていると保存ができない' do
+        @item.condition_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 0")
+      end
+
+      it 'delivery_fee_idが0を選ばれていると保存ができない' do
+        @item.delivery_fee_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery fee must be other than 0")
+      end
+
+      it 'prefecture_idが0を選ばれていると保存ができない' do
+        @item.prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+      end
+
+      it 'delivery_day_idが0を選ばれていると保存ができない' do
+        @item.delivery_day_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery day must be other than 0")
+      end
+
+      it 'priceがない場合は登録できないこと' do
+        @item = FactoryBot.build(:item, price: nil)
+        @item.valid?
+        expect(@item.errors[:price]).to include("can't be blank")
+      end
+
+      it '半角数字以外が含まれている場合は登録できないこと' do
+        @item = FactoryBot.build(:item, price: '５００')
+        @item.valid?
+        expect(@item.errors[:price]).to include("is not a number")
+      end
+
+      it '300未満の値では保存できないこと' do
+        @item = FactoryBot.build(:item, price: 200)
+        @item.valid?
+        expect(@item.errors[:price]).to include("must be greater than or equal to 300")
+      end
+     
+      it '10000000以上の値では保存できないこと' do
+        @item = FactoryBot.build(:item, price: 10_000_000)
+        @item.valid?
+        expect(@item.errors[:price]).to include("must be less than or equal to 9999999")
+      end
     end
-
-    it 'descriptionがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, description: nil)
-      @item.valid?
-      expect(@item.errors[:description]).to include("can't be blank")
-    end
-
-    it 'conditionがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, condition_id: nil)
-      @item.valid?
-      expect(@item.errors[:condition_id]).to include("can't be blank")
-    end
-
-    it 'delivery_feeがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, delivery_fee_id: nil)
-      @item.valid?
-      expect(@item.errors[:delivery_fee_id]).to include("can't be blank")
-    end
-
-    it 'prefecture_idがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, prefecture_id: nil)
-      @item.valid?
-      expect(@item.errors[:prefecture_id]).to include("can't be blank")
-    end
-
-    it 'delivery_dayがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, delivery_day_id: nil)
-      @item.valid?
-      expect(@item.errors[:delivery_day_id]).to include("can't be blank")
-    end
-
-    it 'priceがない場合は登録できないこと' do
-      @item = FactoryBot.build(:item, price: nil)
-      @item.valid?
-      expect(@item.errors[:price]).to include("can't be blank")
-    end
+  end
 end
