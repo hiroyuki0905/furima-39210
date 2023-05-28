@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
       end
     end  
 
-    context '新規登録できるとき' do
+    context '新規登録できないとき' do
       it 'nameがない場合は登録できないこと' do
         @item = FactoryBot.build(:item, name: nil)
         @item.valid?
