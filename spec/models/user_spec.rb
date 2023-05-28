@@ -55,8 +55,8 @@ RSpec.describe User, type: :model do
       it 'パスワードが空欄だと保存できない' do
         @user.password = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank", "Password は半角英数混合で入力してください", "Password confirmation doesn't match Password")
-                                                    
+        expect(@user.errors.full_messages).to include("Password can't be blank", 'Password は半角英数混合で入力してください',
+                                                      "Password confirmation doesn't match Password")
       end
       it 'パスワード（確認含む）が5文字以下だと保存できない' do
         @user.password = 'ab123'
@@ -67,13 +67,14 @@ RSpec.describe User, type: :model do
       it 'パスワードが空欄だと保存できない' do
         @user.password = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank", "Password は半角英数混合で入力してください", "Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password can't be blank", 'Password は半角英数混合で入力してください',
+                                                      "Password confirmation doesn't match Password")
       end
       it '英字のみのパスワードでは登録できない' do
         @user.password = 'password'
         @user.password_confirmation = 'password'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password は半角英数混合で入力してください", 'Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password は半角英数混合で入力してください', 'Password Include both letters and numbers')
       end
       it '数字のみのパスワードでは登録できない' do
         @user.password = '123456'
