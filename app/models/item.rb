@@ -4,10 +4,6 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  def was_attached?
-    self.image.attached?
-  end
-
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
   belongs_to_active_hash :delivery_fee
@@ -23,5 +19,10 @@ class Item < ApplicationRecord
   validates :delivery_day_id, presence: true, exclusion: { in: [0], message: 'must be other than 0' }
   validates :price, presence: true,
                     numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  validates :image, presence: true
+  validates :image, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
+
 end

@@ -1,9 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
-  def index
-  end
-
   def new
     @item = Item.new
   end
@@ -16,6 +13,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def index
+    @items = Item.where.not(user_id: nil).order("created_at DESC")
   end
 
   private
