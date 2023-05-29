@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.where.not(user_id: nil).order("created_at DESC")
+    @items = Item.where.not(user_id: nil).order('created_at DESC')
   end
 
   def show
