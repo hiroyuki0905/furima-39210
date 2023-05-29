@@ -19,6 +19,10 @@ class ItemsController < ApplicationController
     @items = Item.where.not(user_id: nil).order("created_at DESC")
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
   private
 
   def item_params
