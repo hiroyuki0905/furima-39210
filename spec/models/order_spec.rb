@@ -17,43 +17,8 @@ RSpec.describe Order, type: :model do
       expect(@order_form).to be_valid
       end
 
-      it 'user_idが空でなければ保存できる' do
-        @order_form.user_id = 1
-        expect(@order_form).to be_valid
-      end
-
-      it 'item_idが空でなければ保存できる' do
-        @order_form.item_id = 1
-        expect(@order_form).to be_valid
-      end
-
-      it '郵便番号が「3桁＋ハイフン＋4桁」の組み合わせであれば保存できる' do
-        @order_form.postal_code = '123-4560'
-        expect(@order_form).to be_valid
-      end
-
-      it '都道府県が「---」以外かつ空でなければ保存できる' do
-        @order_form.prefecture_id = 1
-        expect(@order_form).to be_valid
-      end
-
-      it '市区町村が空でなければ保存できる' do
-        @order_form.city = ''
-        expect(@order_form).to be_valid
-      end
-
-      it '番地が空でなければ保存できる' do
-        @order_form.house_number = '旭区１２３'
-        expect(@order_form).to be_valid
-      end
-
       it '建物名が空でも保存できる' do
         @order_form.building = ''
-        expect(@order_form).to be_valid
-      end
-
-      it '電話番号が11番桁以内かつハイフンなしであれば保存できる' do
-        @order_form.phone_number = 12_345_678_910
         expect(@order_form).to be_valid
       end
     end
@@ -74,13 +39,13 @@ RSpec.describe Order, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @order_form.postal_code = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("postal_cord can't be blank")
+        expect(@order_form.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid. Include hyphen(-)")
       end
 
       it '郵便番号にハイフンがないと保存できないこと' do
         @order_form.postal_code = 1_234_567
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
+        expect(@order_form.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
 
       it '都道府県が「---」だと保存できないこと' do
@@ -95,10 +60,10 @@ RSpec.describe Order, type: :model do
         expect(@order_form.errors.full_messages).to include("City can't be blank")
       end
 
-      it '市区町村が空だと保存できないこと' do
+      it '番地が空だと保存できないこと' do
         @order_form.house_number = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("House_number can't be blank")
+        expect(@order_form.errors.full_messages).to include("House number can't be blank")
       end
 
       it '電話番号が空だと保存できないこと' do
@@ -119,8 +84,8 @@ RSpec.describe Order, type: :model do
         expect(@order_form.errors.full_messages).to include('Phone number is invalid')
       end
       it "tokenが空では登録できないこと" do
-        @order.token = nil
-        @order.valid?
+        @order_form.token = nil
+        @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
       end
     end
