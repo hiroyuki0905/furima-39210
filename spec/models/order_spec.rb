@@ -20,21 +20,21 @@ RSpec.describe OrderForm, type: :model do
 
     context '配送先情報の保存ができないとき' do
       it '郵便番号が空だと保存できないこと' do
-        @order_form.postal_code = nil
+        @order_form.postal_code = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("郵便番号を入力してください", "郵便番号は無効です。ハイフン(-)を含む")
+        expect(@order_form.errors.full_messages).to include("郵便番号を入力してください", "郵便番号は無効です。ハイフン(-)を含めてください")
       end
 
       it '郵便番号にハイフンがないと保存できないこと' do
         @order_form.postal_code = 1234567
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("郵便番号は無効です。ハイフン(-)を含む")
+        expect(@order_form.errors.full_messages).to include("郵便番号は無効です。ハイフン(-)を含めてください")
       end
 
       it '都道府県が「---」だと保存できないこと' do
         @order_form.prefecture_id = 0
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("都道府県can't be blank")
+        expect(@order_form.errors.full_messages).to include("都道府県を選択してください")
       end
 
       it '市区町村が空だと保存できないこと' do
@@ -52,25 +52,25 @@ RSpec.describe OrderForm, type: :model do
       it '電話番号が空だと保存できないこと' do
         @order_form.phone_number = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("電話番号を入力してください", "電話番号is invalid")
+        expect(@order_form.errors.full_messages).to include("電話番号を入力してください", "電話番号が無効です")
       end
 
       it '電話番号にハイフンがあると保存できないこと' do
         @order_form.phone_number = '123 - 1234 - 1234'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("電話番号is invalid")
+        expect(@order_form.errors.full_messages).to include("電話番号が無効です")
       end
 
       it '電話番号が12桁以下では購入できない' do
         @order_form.phone_number = 1234567891011
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("電話番号は不正な値です")
+        expect(@order_form.errors.full_messages).to include("電話番号が無効です")
       end
       
       it '電話番号が9桁以下では保存できないこと' do
-        @order_form.phone_number = '123456789'
+        @order_form.phone_number = '123456'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("電話番号は不正な値です")
+        expect(@order_form.errors.full_messages).to include("電話番号が無効です")
       end
 
       it "tokenが空では登録できないこと" do

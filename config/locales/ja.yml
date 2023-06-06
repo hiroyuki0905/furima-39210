@@ -32,3 +32,4 @@ ja:
         token: トークン
         user_id: ユーザー
         item_id: アイテム
+        invalid: "電話番号は不正な値です"
