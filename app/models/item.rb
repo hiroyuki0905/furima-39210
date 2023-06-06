@@ -24,11 +24,11 @@ class Item < ApplicationRecord
   validates :image, presence: true, unless: :was_attached?
 
 
-  validates :category_id, numericality: { other_than: 0, message: "can't be blank"}
-  validates :condition_id, numericality: { other_than: 0, message: "can't be blank"}
-  validates :delivery_fee_id, numericality: { other_than: 1, message: "can't be blank"}
-  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank"}
-  validates :delivery_day_id, numericality: { other_than: 1, message: "can't be blank"}
+  validates :category_id, numericality: { other_than: 0, message: "を入力してください"}
+  validates :condition_id, numericality: { other_than: 0, message: "を入力してください"}
+  validates :delivery_fee_id, numericality: { other_than: 1, message: "を入力してください"}
+  validates :prefecture_id, numericality: { other_than: 0, message: "を入力してください"}
+  validates :delivery_day_id, numericality: { other_than: 1, message: "を入力してください"}
 
   def was_attached?
     image.attached?

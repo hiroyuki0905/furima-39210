@@ -16,79 +16,79 @@ RSpec.describe Item, type: :model do
       it 'nameがない場合は登録できないこと' do
         @item = FactoryBot.build(:item, name: nil)
         @item.valid?
-        expect(@item.errors[:name]).to include("can't be blank")
+        expect(@item.errors[:name]).to include("を入力してください")
       end
 
       it 'descriptionがない場合は登録できないこと' do
         @item = FactoryBot.build(:item, description: nil)
         @item.valid?
-        expect(@item.errors[:description]).to include("can't be blank")
+        expect(@item.errors[:description]).to include("を入力してください")
       end
 
       it 'category_idが0を選ばれていると保存ができない' do
         @item.category_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category must be other than 0')
+        expect(@item.errors.full_messages).to include("カテゴリーを入力してください")
       end
 
       it 'condition_idが0を選ばれていると保存ができない' do
         @item.condition_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('Condition must be other than 0')
+        expect(@item.errors.full_messages).to include("商品の状態を入力してください")
       end
 
       it 'delivery_fee_idが0を選ばれていると保存ができない' do
         @item.delivery_fee_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery fee must be other than 0')
+        expect(@item.errors.full_messages).to include("発送までの日数を入力してください")
       end
 
       it 'prefecture_idが0を選ばれていると保存ができない' do
         @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
+        expect(@item.errors.full_messages).to include("発送元の地域を入力してください")
       end
 
       it 'delivery_day_idが0を選ばれていると保存ができない' do
         @item.delivery_day_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery day must be other than 0')
+        expect(@item.errors.full_messages).to include("発送までの日数を入力してください")
       end
 
       it 'priceがない場合は登録できないこと' do
         @item = FactoryBot.build(:item, price: nil)
         @item.valid?
-        expect(@item.errors[:price]).to include("can't be blank")
+        expect(@item.errors[:price]).to include("を入力してください", "は数値で入力してください")
       end
 
       it '半角数字以外が含まれている場合は登録できないこと' do
         @item = FactoryBot.build(:item, price: '５００')
         @item.valid?
-        expect(@item.errors[:price]).to include('is not a number')
+        expect(@item.errors[:price]).to include("は数値で入力してください")
       end
 
       it '300未満の値では保存できないこと' do
         @item = FactoryBot.build(:item, price: 200)
         @item.valid?
-        expect(@item.errors[:price]).to include('must be greater than or equal to 300')
+        expect(@item.errors[:price]).to include("は300以上の値にしてください")
       end
 
       it '10000000以上の値では保存できないこと' do
         @item = FactoryBot.build(:item, price: 10_000_000)
         @item.valid?
-        expect(@item.errors[:price]).to include('must be less than or equal to 9999999')
+        expect(@item.errors[:price]).to include("は9999999以下の値にしてください")
       end
 
       it 'ユーザーが紐づいていないと保存できないこと' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors[:user]).to include('must exist')
+        expect(@item.errors[:user]).to include("を入力してください")
       end
 
       it '画像が添付されていないと保存できないこと' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors[:image]).to include("can't be blank")
+        expect(@item.errors[:image]).to include("を入力してください")
       end
     end
   end
